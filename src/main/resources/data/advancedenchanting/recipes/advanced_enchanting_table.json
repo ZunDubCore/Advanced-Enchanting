@@ -1,0 +1,28 @@
+{
+    "type":    "minecraft:crafting_shaped",
+    "pattern": [
+        "gbg",
+        "oto",
+        "geg"
+    ],
+    "key":     {
+        "b": {
+            "item": "minecraft:writable_book"
+        },
+        "o": {
+            "tag": "forge:obsidian"
+        },
+        "e": {
+            "item": "minecraft:ender_eye"
+        },
+        "g": {
+            "tag": "forge:ingots/gold"
+        },
+        "t": {
+            "item": "minecraft:enchanting_table"
+        }
+    },
+    "result":  {
+        "item": "advancedenchanting:advanced_enchanting_table"
+    }
+}
