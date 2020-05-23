@@ -13,6 +13,7 @@ buildscript {
 
 plugins {
     id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id 'org.ajoberstar.grgit' version '4.0.2'
     id 'java'
     id 'eclipse'
     id 'idea'
@@ -209,13 +210,60 @@ tasks.curseforge.dependsOn jar, sourcesJar
 
 if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKey')) {
     println "Enabling Curseforge config"
+
     curseforge {
         apiKey = System.getenv("CURSEFORGE_KEY") ?: project.findProperty("curseforgeKey")
 
+        def generatedChangelog = "Unable to generate changelog :("
+        def currentCommit = System.getenv("GIT_COMMIT")
+        def prevCommit = System.getenv("GIT_PREVIOUS_SUCCESSFUL_COMMIT") ?: System.getenv("GIT_PREVIOUS_COMMIT")
+
+        // TODO: This only works in a CI. Add proper CI system
+        if (currentCommit != null && prevCommit != null) {
+            generatedChangelog = ""
+
+            grgit.log {
+                range(prevCommit, currentCommit)
+            }.reverse().each { commit ->
+                String message = commit.shortMessage
+
+                if (!message.startsWith("Merge branch") && !message.startsWith("Merge pull request")) {
+                    //Ignore PRs and Merges
+                    message = message.replaceAll("#(\\d+)", { match ->//turn issues/prs into links (github currently supports prs being linked as issues)
+                        return "<a href=\"https://github.com/ZunDubCore/Advanced-Enchanting/issues/${match[1]}\">${match[0]}</a>"
+                    })
+                    if (generatedChangelog != "") {
+                        generatedChangelog += "<br>"
+                    }
+                    generatedChangelog += "<a href=\"https://github.com/ZunDubCore/Advanced-Enchanting/commit/${commit.id}\">${commit.getAbbreviatedId()}</a> - ${message}\n"
+                }
+            }
+
+            println "Changelog generated"
+        }
+
+        def releaseNotesFile = project.file("docs/release_${mod_version}.html")
+
+        if (releaseNotesFile.exists()) {
+            //Add any version specific changelog stuff
+            def releaseNotes = releaseNotesFile.getText()
+            generatedChangelog = "$releaseNotes<br> $generatedChangelog"
+        }
+
+        if (curse_release_type == "alpha") {
+            //Add a warning at the top about what an alpha build means
+            generatedChangelog = "Warning: Advanced Enchanting is currently in alpha, and is not " +
+                    "recommended for widespread use in modpacks. There are likely to be game " +
+                    "breaking bugs, and updating from one alpha to the next may cause various" +
+                    "blocks to disappear/void their contents. While we will try to not have this " +
+                    "happen/keep it to a minimum, make sure to make backups." +
+                    "<br> $generatedChangelog"
+        }
+
         project {
             id = "${curse_project_id}"
-            // TODO: Make changelog work
-            changelog = ''
+            changelogType = 'html'
+            changelog = "${generatedChangelog}"
             releaseType = "${curse_release_type}"
             addGameVersion "${minecraft_version}"
 
