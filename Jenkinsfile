@@ -4,6 +4,10 @@ pipeline {
 
     agent any
 
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: '')
+    }
+
     stages {
 
         stage('Clean') {
@@ -22,7 +26,22 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'advanced_enchanting_secrets', variable: 'ORG_GRADLE_PROJECT_secretFile')]) {
                     echo 'Building project.'
-                    sh './gradlew --stacktrace build curseforge'
+                    sh './gradlew --stacktrace build'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                expression {
+                    return params.DEPLOY ==~ /(?i)(Y|YES|T|TRUE|ON|RUN)/
+                }
+            }
+
+            steps {
+                withCredentials([file(credentialsId: 'advanced_enchanting_secrets', variable: 'ORG_GRADLE_PROJECT_secretFile')]) {
+                    echo 'Deploying project.'
+                    sh './gradlew --stacktrace curseforge'
                 }
             }
         }
