@@ -22,6 +22,12 @@ plugins {
 
 apply plugin: 'net.minecraftforge.gradle'
 
+import groovy.json.JsonSlurper
+
+if (project.hasProperty('secretFile')) {
+    loadSecrets(new File((String) findProperty('secretFile')))
+}
+
 version = "${minecraft_version}-${mod_version}." + getBuildNumber()
 archivesBaseName = "${mod_name}".replaceAll("\\s", "")
 
@@ -285,5 +291,39 @@ publishing {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
+    }
+}
+
+/*
+ This Gradle script provides a way to load values from a Json file into the project properties.
+ Properties are named with the key value from the Json, and the value is the json value.
+*/
+
+// Loads secrets using a secrets.json file or a file path specified by the environment.
+def loadSecrets() {
+
+    final def secretFile = file System.getenv('SECRET_FILE') ?: 'secrets.json'
+    loadSecrets(secretFile)
+}
+
+// Loads secrets using a specified json file.
+def loadSecrets(secretFile) {
+
+    if (secretFile.exists()) {
+
+        secretFile.withReader {
+
+            Map secretMap = new JsonSlurper().parse it
+
+            for (entry in secretMap) {
+
+                project.ext.set(entry.key, entry.value)
+            }
+
+            project.logger.info('Successfully loaded ' + secretMap.size() + ' secret properties')
+        }
+    }
+    else {
+        project.logger.warn('The secret file ' + secretFile.getName() + ' could not be loaded. It does not exist.')
     }
 }
