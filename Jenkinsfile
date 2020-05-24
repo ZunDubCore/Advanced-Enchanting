@@ -12,7 +12,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'advanced_enchanting_secrets', variable: 'ORG_GRADLE_PROJECT_secretFile')]) {
                     echo 'Cleaning project workspace.'
                     sh 'chmod +x gradlew'
-                    sh './gradlew clean'
+                    sh './gradlew --stacktrace clean'
                 }
             }
         }
