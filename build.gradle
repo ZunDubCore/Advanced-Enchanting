@@ -110,7 +110,7 @@ repositories {
         url 'https://maven.mcmoddev.com'
     }
     maven {
-        name = "Progwml6 - JEI"
+        name "Progwml6 - JEI"
         url 'http://dvs1.progwml6.com/files/maven'
     }
     maven {
