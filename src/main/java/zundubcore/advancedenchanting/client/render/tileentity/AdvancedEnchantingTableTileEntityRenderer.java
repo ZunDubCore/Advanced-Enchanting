@@ -3,7 +3,6 @@ package zundubcore.advancedenchanting.client.render.tileentity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-import net.darkhax.bookshelf.util.MathsUtils;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Vector3f;
@@ -23,6 +22,7 @@ import net.minecraft.world.World;
 import zundubcore.advancedenchanting.AdvancedEnchanting;
 import zundubcore.advancedenchanting.EnchantingLogic;
 import zundubcore.advancedenchanting.tileentity.AdvancedEnchantingTableTileEntity;
+import zundubcore.advancedenchanting.util.MathUtils;
 
 public class AdvancedEnchantingTableTileEntityRenderer extends
         TileEntityRenderer<AdvancedEnchantingTableTileEntity> {
@@ -76,7 +76,7 @@ public class AdvancedEnchantingTableTileEntityRenderer extends
                     tileEntityIn.getPos().getX() + 0.5, tileEntityIn.getPos().getY() + 1,
                     tileEntityIn.getPos().getZ() + 0.5, 0, -1, 0, 0.45);
         }
-        else if (MathsUtils.tryPercentage(0.5) && EnchantingLogic.isTreasuresAvailable(
+        else if (MathUtils.tryPercentage(0.5) && EnchantingLogic.isTreasuresAvailable(
                 Enchantments.MENDING, tileEntityIn.getWorld(), tileEntityIn.getPos(),
                 tileEntityIn.getPos().down())) {
 
