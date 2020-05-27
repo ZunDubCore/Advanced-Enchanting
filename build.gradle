@@ -207,7 +207,7 @@ task forgelibJar(type: Jar) {
     classifier = 'forgelib'
 }
 
-tasks.build.dependsOn sourcesJar
+tasks.build.dependsOn sourcesJar, javadocJar, deobfJar, forgelibJar
 
 //Adds the artifact types added by this script to the actual artifacts list.
 artifacts {
