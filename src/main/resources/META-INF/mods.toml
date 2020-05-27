@@ -44,16 +44,29 @@ issueTrackerURL="https://github.com/ZunDubCore/Advanced-Enchanting/issues" #opti
         ${mod_description}
     '''
 
-[[dependencies.${mod_id}]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[${mc_version}]"
+
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.${mod_id}]] #optional
+
+    # The modid of the dependency
+    modId="minecraft" #mandatory
+
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+
+    # The version range of the dependency
+    versionRange="[${mc_version}]" #mandatory
+
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.${mod_id}]] #optional
 
-    # the modid of the dependency
+    # The modid of the dependency
     modId="forge" #mandatory
 
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -61,6 +74,26 @@ issueTrackerURL="https://github.com/ZunDubCore/Advanced-Enchanting/issues" #opti
 
     # The version range of the dependency
     versionRange="[${min_forge_version},)" #mandatory
+
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+
+# Bookshelf dependency
+# TODO: Deprecated. To be removed in the future.
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.${mod_id}]] #optional
+
+    # The modid of the dependency
+    modId="bookshelf" #mandatory
+
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+
+    # The version range of the dependency
+    versionRange="[${bookshelf_version},)" #mandatory
 
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
