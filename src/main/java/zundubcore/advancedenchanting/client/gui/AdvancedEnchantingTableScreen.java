@@ -2,7 +2,6 @@ package zundubcore.advancedenchanting.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.darkhax.bookshelf.client.gui.ButtonItemStack;
 import net.darkhax.bookshelf.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
