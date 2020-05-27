@@ -180,13 +180,41 @@ processResources {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+
+    description = 'Creates a JAR containing the source code.'
     from sourceSets.main.allSource
+    classifier = 'sources'
 }
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+
+    description = 'Creates a JAR containing the JavaDocs.'
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task deobfJar(type: Jar) {
+
+    description = 'Creates a JAR containing the non-obfuscated compiled code.'
+    from sourceSets.main.output
+    classifier = "deobf"
+}
+
+task forgelibJar(type: Jar) {
+    description = 'Creates a compiled JAR which also contains raw sources.'
+    from sourceSets.main.output
+    from sourceSets.main.allJava
+    classifier = 'forgelib'
+}
+
 tasks.build.dependsOn sourcesJar
 
+//Adds the artifact types added by this script to the actual artifacts list.
 artifacts {
     archives sourcesJar
+    archives javadocJar
+    archives deobfJar
+    archives forgelibJar
 }
 
 String getBuildNumber() {
