@@ -320,6 +320,9 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
             mainArtifact jar
 
             addArtifact sourcesJar
+            addArtifact javadocJar
+            addArtifact deobfJar
+            addArtifact forgelibJar
         }
     }
 }
