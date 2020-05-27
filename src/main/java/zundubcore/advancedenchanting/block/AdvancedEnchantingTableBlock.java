@@ -89,9 +89,9 @@ public class AdvancedEnchantingTableBlock extends ContainerBlock {
 
     /**
      * Called periodically clientside on blocks near the player to show effects (like furnace fire
-     * particles). Note that this method is unrelated to {@link randomTick} and {@link
-     * #needsRandomTick}, and will always be called regardless of whether the block can receive
-     * random update ticks
+     * particles). Note that this method is unrelated to {@link BlockState#randomTick} and {@link
+     * BlockState#ticksRandomly}, and will always be called regardless of whether the block can
+     * receive random update ticks
      */
     @OnlyIn(Dist.CLIENT)
     @Override
@@ -137,7 +137,7 @@ public class AdvancedEnchantingTableBlock extends ContainerBlock {
      * MODELBLOCK_ANIMATED for TESR-only, LIQUID for vanilla liquids, INVISIBLE to skip all
      * rendering
      *
-     * @deprecated call via {@link IBlockState#getRenderType()} whenever possible.
+     * @deprecated call via {@link BlockState#getRenderType()} whenever possible.
      * Implementing/overriding is fine.
      */
     @Override

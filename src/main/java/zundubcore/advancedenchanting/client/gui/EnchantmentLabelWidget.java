@@ -108,7 +108,6 @@ public class EnchantmentLabelWidget extends Widget {
      * enchantment being represented.
      *
      * @param xPos  The xPos of the slider.
-     * @param baseX The previous slider position.
      */
     public void updateSlider(double xPos) {
 

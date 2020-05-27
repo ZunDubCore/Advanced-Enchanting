@@ -5,9 +5,9 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 /**
- * This holds the Client & Server Configs and the Client & Server ConfigSpecs. It can be merged into
- * the main ExampleModConfig class, but is separate because of personal preference and to keep the
- * code organised
+ * This holds the Client &amp; Server Configs and the Client &amp; Server ConfigSpecs. It can be
+ * merged into the main ExampleModConfig class, but is separate because of personal preference and
+ * to keep the code organised
  */
 public final class ConfigHolder {
 
