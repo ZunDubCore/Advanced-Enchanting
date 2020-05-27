@@ -2,7 +2,6 @@ package zundubcore.advancedenchanting.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.darkhax.bookshelf.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
@@ -394,7 +393,7 @@ public class AdvancedEnchantingTableScreen extends
         }
         else {
 
-            final boolean isCreative = PlayerUtils.getClientPlayer().isCreative();
+            final boolean isCreative = this.container.player.isCreative();
 
             final int playerXP = isCreative ? Integer.MAX_VALUE : EnchantingLogic.getExperience(
                     this.container.player);
