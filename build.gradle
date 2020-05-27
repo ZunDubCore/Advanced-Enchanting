@@ -145,11 +145,6 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-    compile fg.deobf("net.darkhax.bookshelf:Bookshelf-${minecraft_version}:${bookshelf_version}")
-    compile fg.deobf("com.blamejared.crafttweaker:CraftTweaker-${minecraft_version}:${crafttweaker_version}")
-    compile fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-
 }
 
 def properties = ['version'             : project.version,
@@ -294,13 +289,7 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
             releaseType = "${curse_release_type}"
             addGameVersion "${minecraft_version}"
 
-            mainArtifact(jar) {
-                relations {
-                    requiredDependency 'bookshelf'
-                    requiredDependency 'crafttweaker'
-                    requiredDependency 'jei'
-                }
-            }
+            mainArtifact jar
 
             addArtifact sourcesJar
         }
