@@ -23,6 +23,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 import groovy.json.JsonSlurper
+import net.minecraftforge.gradle.common.task.SignJar
 
 if (project.hasProperty('secretFile')) {
     loadSecrets(new File((String) findProperty('secretFile')))
@@ -216,6 +217,30 @@ artifacts {
     archives deobfJar
     archives forgelibJar
 }
+
+task signJar(type: SignJar, dependsOn: jar) {
+
+    onlyIf { // Skip the task if our secret data isn't available
+        project.hasProperty('keyStore')
+    }
+
+    if (project.hasProperty('keyStore')) {
+
+        project.logger.lifecycle('Signing jar ' + jar.archivePath.getName());
+
+        keyStore = project.findProperty('keyStore')
+        alias = project.findProperty('keyStoreAlias')
+        storePass = project.findProperty('keyStorePass')
+        keyPass = project.findProperty('keyStoreKeyPass')
+        inputFile = jar.archivePath
+        outputFile = jar.archivePath
+    }
+    else {
+        project.logger.lifecycle('Could not sign ' + jar.archivePath.getName() + '. No keyStore property could be found')
+    }
+}
+
+tasks.build.dependsOn signJar
 
 String getBuildNumber() {
     return System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER') :
