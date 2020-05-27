@@ -120,3 +120,23 @@ issueTrackerURL="https://github.com/ZunDubCore/Advanced-Enchanting/issues" #opti
 
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
+
+# JEI dependency
+# TODO: Deprecated. To be removed in the future.
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.${mod_id}]] #optional
+
+    # The modid of the dependency
+    modId="jei" #mandatory
+
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+
+    # The version range of the dependency
+    versionRange="[${jei_version},)" #mandatory
+
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
