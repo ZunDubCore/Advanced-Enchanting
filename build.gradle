@@ -33,7 +33,8 @@ archivesBaseName = "${mod_name}".replaceAll("\\s", "")
 
 def forge = "${minecraft_version}-${forge_version}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+// Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -151,9 +152,16 @@ dependencies {
 
 }
 
-def properties = ['version'       : project.version, 'minecraft_version': minecraft_version, 'min_forge_version': min_forge_version,
-                  'loader_version': loader_version, 'mod_name': mod_name, 'bookshelf_version': bookshelf_version, 'mod_id': mod_id, 'mod_credits': mod_credits,
-                  'mod_authors'   : mod_authors, 'mod_description': mod_description]
+def properties = ['version'          : project.version,
+                  'minecraft_version': minecraft_version,
+                  'min_forge_version': min_forge_version,
+                  'loader_version'   : loader_version,
+                  'mod_name'         : mod_name,
+                  'bookshelf_version': bookshelf_version,
+                  'mod_id'           : mod_id,
+                  'mod_credits'      : mod_credits,
+                  'mod_authors'      : mod_authors,
+                  'mod_description'  : mod_description]
 
 // Process resources on build
 processResources {
@@ -185,7 +193,8 @@ artifacts {
 }
 
 String getBuildNumber() {
-    return System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER') : System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER') : '0'
+    return System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER') :
+            System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER') : '0'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -215,9 +224,11 @@ jar.finalizedBy('reobfJar')
 tasks.curseforge.dependsOn jar, sourcesJar
 
 if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKey')) {
+
     println "Enabling Curseforge config"
 
     curseforge {
+
         apiKey = System.getenv("CURSEFORGE_KEY") ?: project.findProperty("curseforgeKey")
 
         def generatedChangelog = "Unable to generate changelog :("
@@ -226,22 +237,30 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
 
         // TODO: This only works in a CI. Add proper CI system
         if (currentCommit != null && prevCommit != null) {
+
             generatedChangelog = ""
 
             grgit.log {
                 range(prevCommit, currentCommit)
-            }.reverse().each { commit ->
+            }.reverse().each {commit ->
+
                 String message = commit.shortMessage
 
                 if (!message.startsWith("Merge branch") && !message.startsWith("Merge pull request")) {
-                    //Ignore PRs and Merges
-                    message = message.replaceAll("#(\\d+)", { match ->//turn issues/prs into links (github currently supports prs being linked as issues)
+
+                    // Ignore PRs and Merges
+                    // Turn issues/prs into links (github currently supports prs being linked as issues)
+
+                    message = message.replaceAll("#(\\d+)", {match ->
                         return "<a href=\"https://github.com/ZunDubCore/Advanced-Enchanting/issues/${match[1]}\">${match[0]}</a>"
                     })
+
                     if (generatedChangelog != "") {
                         generatedChangelog += "<br>"
                     }
-                    generatedChangelog += "<a href=\"https://github.com/ZunDubCore/Advanced-Enchanting/commit/${commit.id}\">${commit.getAbbreviatedId()}</a> - ${message}\n"
+
+                    generatedChangelog +=
+                            "<a href=\"https://github.com/ZunDubCore/Advanced-Enchanting/commit/${commit.id}\">${commit.getAbbreviatedId()}</a> - ${message}\n"
                 }
             }
 
@@ -258,12 +277,12 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
 
         if (curse_release_type == "alpha") {
             //Add a warning at the top about what an alpha build means
-            generatedChangelog = "Warning: Advanced Enchanting is currently in alpha, and is not " +
-                    "recommended for widespread use in modpacks. There are likely to be game " +
-                    "breaking bugs, and updating from one alpha to the next may cause various" +
-                    "blocks to disappear/void their contents. While we will try to not have this " +
-                    "happen/keep it to a minimum, make sure to make backups." +
-                    "<br> $generatedChangelog"
+            generatedChangelog = "Warning: Advanced Enchanting is currently in alpha, and is not "
+            +"recommended for widespread use in modpacks. There are likely to be game "
+            +"breaking bugs, and updating from one alpha to the next may cause various"
+            +"blocks to disappear/void their contents. While we will try to not have this "
+            +"happen/keep it to a minimum, make sure to make backups."
+            +"<br> $generatedChangelog"
         }
 
         project {
@@ -277,7 +296,6 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
 
             addArtifact sourcesJar
         }
-
     }
 }
 
@@ -301,7 +319,6 @@ publishing {
 
 // Loads secrets using a secrets.json file or a file path specified by the environment.
 def loadSecrets() {
-
     final def secretFile = file System.getenv('SECRET_FILE') ?: 'secrets.json'
     loadSecrets(secretFile)
 }
