@@ -274,10 +274,10 @@ if (System.getenv("CURSEFORGE_KEY") != null || project.hasProperty('curseforgeKe
 
         if (curse_release_type == "alpha") {
             //Add a warning at the top about what an alpha build means
-            generatedChangelog = "Warning: Advanced Enchanting is currently in alpha, and is not" +
-                    "recommended for widespread use in modpacks. There are likely to be game" +
-                    "breaking bugs, and updating from one alpha to the next may cause various" +
-                    "blocks to disappear/void their contents. While we will try to not have this" +
+            generatedChangelog = "Warning: Advanced Enchanting is currently in alpha, and is not " +
+                    "recommended for widespread use in modpacks. There are likely to be game " +
+                    "breaking bugs, and updating from one alpha to the next may cause various " +
+                    "blocks to disappear/void their contents. While we will try to not have this " +
                     "happen/keep it to a minimum, make sure to make backups." +
                     "<br> $generatedChangelog"
         }
