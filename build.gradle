@@ -152,16 +152,17 @@ dependencies {
 
 }
 
-def properties = ['version'          : project.version,
-                  'minecraft_version': minecraft_version,
-                  'min_forge_version': min_forge_version,
-                  'loader_version'   : loader_version,
-                  'mod_name'         : mod_name,
-                  'bookshelf_version': bookshelf_version,
-                  'mod_id'           : mod_id,
-                  'mod_credits'      : mod_credits,
-                  'mod_authors'      : mod_authors,
-                  'mod_description'  : mod_description]
+def properties = ['version'             : project.version,
+                  'minecraft_version'   : minecraft_version,
+                  'min_forge_version'   : min_forge_version,
+                  'loader_version'      : loader_version,
+                  'mod_name'            : mod_name,
+                  'bookshelf_version'   : bookshelf_version,
+                  'crafttweaker_version': crafttweaker_version,
+                  'mod_id'              : mod_id,
+                  'mod_credits'         : mod_credits,
+                  'mod_authors'         : mod_authors,
+                  'mod_description'     : mod_description]
 
 // Process resources on build
 processResources {
