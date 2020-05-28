@@ -1,6 +1,8 @@
 {
     "block.advancedenchanting.advanced_enchanting_table": "Advanced Enchanting Table",
 
+    "item.advancedenchanting.table_upgrade":              "Table Upgrade",
+
     "tab.advancedenchanting.main":                        "Advanced Enchanting",
 
     "gui.advancedenchanting.info.playerxp":               "EXP: %d",
