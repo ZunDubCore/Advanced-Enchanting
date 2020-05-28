@@ -4,7 +4,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -15,7 +14,7 @@ import zundubcore.advancedenchanting.init.AdvancedEnchantingBlocks;
 import zundubcore.advancedenchanting.init.AdvancedEnchantingTileEntityTypes;
 
 public class AdvancedEnchantingTableTileEntity extends FloatingBookTileEntity implements
-        ITickableTileEntity, INamedContainerProvider {
+        INamedContainerProvider {
 
     public AdvancedEnchantingTableTileEntity() {
         super(AdvancedEnchantingTileEntityTypes.ADVANCED_ENCHANTING_TABLE.get());
