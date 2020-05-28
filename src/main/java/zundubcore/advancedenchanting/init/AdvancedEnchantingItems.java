@@ -1,10 +1,12 @@
 package zundubcore.advancedenchanting.init;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import zundubcore.advancedenchanting.AdvancedEnchanting;
+import zundubcore.advancedenchanting.item.TableUpgradeItem;
 
 /**
  * Holds a list of all our {@link Item}s. Suppliers that create Items are added to the
@@ -18,6 +20,8 @@ public final class AdvancedEnchantingItems {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS,
             AdvancedEnchanting.MODID);
 
-    // Currently no items
-    // TODO: Add book items and table upgrade
+    public static final RegistryObject<Item> TABLE_UPGRADE = ITEMS.register(
+            "table_upgrade",
+            () -> new TableUpgradeItem(new Item.Properties().group(
+                    AdvancedEnchantingItemGroups.ADVANCED_ENCHANTING_ITEM_GROUP)));
 }
