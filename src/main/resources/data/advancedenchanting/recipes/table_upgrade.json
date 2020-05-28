@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "gbg",
+        "o o",
+        "geg"
+    ],
+    "key": {
+        "b": {
+            "item": "minecraft:writable_book"
+        },
+        "o": {
+            "tag": "forge:obsidian"
+        },
+        "e": {
+            "item": "minecraft:ender_eye"
+        },
+        "g": {
+            "tag": "forge:ingots/gold"
+        }
+
+    },
+    "result": {
+        "item": "advancedenchanting:table_upgrade"
+    }
+}
