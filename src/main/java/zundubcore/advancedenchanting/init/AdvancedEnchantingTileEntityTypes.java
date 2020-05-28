@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import zundubcore.advancedenchanting.AdvancedEnchanting;
 import zundubcore.advancedenchanting.tileentity.AdvancedEnchantingTableTileEntity;
+import zundubcore.advancedenchanting.tileentity.DecorativeBookTileEntity;
 
 /**
  * Holds a list of all our {@link TileEntityType}s. Suppliers that create TileEntityTypes are added
@@ -25,4 +26,9 @@ public final class AdvancedEnchantingTileEntityTypes {
             ADVANCED_ENCHANTING_TABLE = TILE_ENTITY_TYPES.register("advanced_enchanting_table",
             () -> TileEntityType.Builder.create(AdvancedEnchantingTableTileEntity::new,
                     AdvancedEnchantingBlocks.ADVANCED_ENCHANTING_TABLE.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<DecorativeBookTileEntity>>
+            DECORATIVE_BOOK = TILE_ENTITY_TYPES.register("decorative_book",
+            () -> TileEntityType.Builder.create(DecorativeBookTileEntity::new,
+                    AdvancedEnchantingBlocks.DECORATIVE_BOOK.get()).build(null));
 }

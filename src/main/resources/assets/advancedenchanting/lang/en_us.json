@@ -1,6 +1,8 @@
 {
     "block.advancedenchanting.advanced_enchanting_table": "Advanced Enchanting Table",
 
+    "block.advancedenchanting.decorative_book":           "Decorative Book",
+
     "tab.advancedenchanting.main":                        "Advanced Enchanting",
 
     "gui.advancedenchanting.info.playerxp":               "EXP: %d",

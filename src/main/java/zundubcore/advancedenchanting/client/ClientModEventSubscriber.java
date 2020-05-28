@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import zundubcore.advancedenchanting.AdvancedEnchanting;
 import zundubcore.advancedenchanting.client.gui.AdvancedEnchantingTableScreen;
 import zundubcore.advancedenchanting.client.render.tileentity.AdvancedEnchantingTableTileEntityRenderer;
+import zundubcore.advancedenchanting.client.render.tileentity.DecorativeBookTileEntityRenderer;
 import zundubcore.advancedenchanting.init.AdvancedEnchantingContainerTypes;
 import zundubcore.advancedenchanting.init.AdvancedEnchantingTileEntityTypes;
 
@@ -50,6 +51,10 @@ public final class ClientModEventSubscriber {
         ClientRegistry.bindTileEntityRenderer(
                 AdvancedEnchantingTileEntityTypes.ADVANCED_ENCHANTING_TABLE.get(),
                 AdvancedEnchantingTableTileEntityRenderer::new);
+
+        ClientRegistry.bindTileEntityRenderer(
+                AdvancedEnchantingTileEntityTypes.DECORATIVE_BOOK.get(),
+                DecorativeBookTileEntityRenderer::new);
 
         LOGGER.debug("Registered TileEntity Renderers");
 

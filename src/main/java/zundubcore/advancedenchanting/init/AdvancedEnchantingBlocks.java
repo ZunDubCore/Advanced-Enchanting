@@ -8,6 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import zundubcore.advancedenchanting.AdvancedEnchanting;
 import zundubcore.advancedenchanting.block.AdvancedEnchantingTableBlock;
+import zundubcore.advancedenchanting.block.DecorativeBookBlock;
 
 /**
  * Holds a list of all our {@link Block}s. Suppliers that create Blocks are added to the
@@ -25,4 +26,8 @@ public final class AdvancedEnchantingBlocks {
     public static final RegistryObject<Block> ADVANCED_ENCHANTING_TABLE = BLOCKS.register(
             "advanced_enchanting_table", () -> new AdvancedEnchantingTableBlock(
                     Block.Properties.create(Material.ROCK).hardnessAndResistance(5.0F, 2000.0F)));
+
+    public static final RegistryObject<Block> DECORATIVE_BOOK = BLOCKS.register(
+            "decorative_book", () -> new DecorativeBookBlock(
+                    Block.Properties.create(Material.WOOD).hardnessAndResistance(1.5F).lightValue(14).notSolid()));
 }
